@@ -1,0 +1,42 @@
+name: Compile Matter File
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'sections/**'
+      - 'scripts/**'
+  workflow_dispatch:  # Allow manual triggers
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install pandoc
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y pandoc texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
+    
+    - name: Make scripts executable
+      run: chmod +x scripts/*.sh
+    
+    - name: Compile matter file
+      run: ./scripts/compile.sh
+    
+    - name: Upload PDF artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: matter-file-pdf
+        path: output/matter-file.pdf
+        retention-days: 30
+    
+    - name: Commit compiled files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add MATTER_FILE.md output/
+        git diff --staged --quiet || git commit -m "Auto-compile matter file [skip ci]"
+        git push
