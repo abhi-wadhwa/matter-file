@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matter File — Debate Research</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h1 class="logo">Matter File</h1>
+        <p class="tagline">Debate Research System</p>
+      </div>
+      <nav id="nav"></nav>
+      <div class="sidebar-footer">
+        <button class="btn-full" id="btn-full-doc">View Full Document</button>
+        <p class="build-time" id="build-time"></p>
+      </div>
+    </aside>
+
+    <!-- Mobile header -->
+    <header class="mobile-header" id="mobile-header">
+      <button class="hamburger" id="hamburger">☰</button>
+      <span class="mobile-title">Matter File</span>
+    </header>
+
+    <!-- Main content -->
+    <main class="content" id="content">
+      <div class="content-inner" id="content-inner">
+        <!-- Rendered here by JS -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Overlay for mobile sidebar -->
+  <div class="overlay" id="overlay"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
